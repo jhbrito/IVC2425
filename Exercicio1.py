@@ -23,7 +23,25 @@ imagem3[0:200, 400:600] = [0, 1.5, 0]
 
 cv2.imshow("Image3", imagem3)
 
+# Declare, utilizando os tipos de dados Numpy da linguagem Python,
+# um array capaz de armazenar uma imagem em escala de cinzentos,
+# 8bpp, com resolução 704x576.
+w = 704
+h = 576
+border_w = 5
 
+imagem = np.zeros((h, w), dtype=np.uint8)
+imagem[:, :] = 127
+imagem[0:border_w, :] = 0
+
+# imagem[h-border_w:h, :] = 0
+imagem[-border_w:, :] = 0
+
+imagem[:, 0:border_w] = 0
+#imagem[:, -1] = 0
+imagem[:, w-border_w:w] = 0
+
+cv2.imshow("Imagem", imagem)
 
 cv2.waitKey(0)
 
