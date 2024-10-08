@@ -4,10 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
 folder = "Files"
 image = cv2.imread(os.path.join(folder, "baboon.png"))
-# image = cv2.imread(os.path.join(folder, "cao.png"))
+# image = cv2.imread(os.path.join(folder, "cao.jpg"))
 # image = cv2.imread(os.path.join(folder, "lena.png"))
 # image = cv2.imread(os.path.join(folder, "moedas.jpg"))
 # image = cv2.imread(os.path.join(folder, "PET-Body-02.jpg"))
@@ -17,7 +16,7 @@ image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 #cv2.imshow("image_gray", image_gray)
 
 def ivc_histogram(src):
-    hist = np.zeros((256,), dtype=np.uint16)
+    hist = np.zeros((256,), dtype=np.uint32)
     for i in range(256):
         m_i = np.sum(src==i)
         hist[i] = m_i
