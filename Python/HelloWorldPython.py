@@ -61,7 +61,11 @@ print(c)
 # Strings
 m = "hello"
 print(m)
+print(m[1])
+
 print(m[0:1])
+print(m[1:4])
+
 o = "goodbye"
 p = m + " " + o
 print("p:", p)
