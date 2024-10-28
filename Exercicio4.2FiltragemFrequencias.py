@@ -20,7 +20,9 @@ for image_name in images:
     cv2.imshow("Original", image_gray)
 
     image_fft = np.fft.fft2(image_gray)
-    image_fft_v = np.abs(image_fft)/np.mean(np.abs(image_fft))
+    image_fft_v = np.abs(image_fft)
+    image_fft_v = image_fft_v/np.mean(image_fft_v)
+    #image_fft_v = np.abs(image_fft)/np.mean(np.abs(image_fft))
     cv2.imshow("FFT", image_fft_v)
 
     image_fft_shift = np.fft.fftshift(image_fft)
