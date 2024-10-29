@@ -15,7 +15,7 @@ conda env export > environment.yml
 ## Import conda environment
 conda env create -n Project_Environment_Name --file environment.yml
 
-#PIP
+# PIP
 
 ## Import pip environment
 pip install -r requirements.txt
