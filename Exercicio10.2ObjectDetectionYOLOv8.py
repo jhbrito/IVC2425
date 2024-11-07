@@ -4,7 +4,7 @@ import time
 import numpy as np
 from ultralytics import YOLO
 
-use_cam = False
+use_cam = True
 folder = "Files"
 file = "vtest.avi"
 
