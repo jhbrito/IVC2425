@@ -1,13 +1,16 @@
 import cv2
 import os
 import time
-
 import numpy as np
 
+use_cam = False
 folder = "Files"
 file = "vtest.avi"
 
-cap = cv2.VideoCapture(os.path.join(folder, file))
+if use_cam:
+    cap = cv2.VideoCapture()
+else:
+    cap = cv2.VideoCapture(os.path.join(folder, file))
 
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
@@ -21,7 +24,9 @@ while True:
     if not cap.isOpened():
         cap.open(0)
     _, image = cap.read()
-    image = image[:, ::-1, :]
+
+    if use_cam:
+        image = image[:, ::-1, :]
 
     persons, _ = hog.detectMultiScale(image,
                                  winStride=(8, 8),
