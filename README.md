@@ -25,3 +25,7 @@ pip freeze > requirements.txt
 
 ## Unofficial Windows Binaries for Python Extension Packages
 <https://www.lfd.uci.edu/~gohlke/pythonlibs/>
+
+# Fix YOLO for GPU
+pip uninstall torch torchvision torchaudio
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118

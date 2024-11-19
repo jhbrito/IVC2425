@@ -4,6 +4,7 @@ import time
 import numpy as np
 from ultralytics import YOLO
 
+
 use_cam = True
 folder = "Files"
 file = "vtest.avi"
@@ -14,7 +15,7 @@ else:
     cap = cv2.VideoCapture(os.path.join(folder, file))
 
 
-model = YOLO("yolov8s.pt")
+model = YOLO("yolov8m.pt")
 print("Known classes: ", str(len(model.names)))
 for i in range(len(model.names)):
     print(model.names[i])
