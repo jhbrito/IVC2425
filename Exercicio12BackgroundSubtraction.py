@@ -11,7 +11,7 @@ parser.add_argument("--input",
                     default="vtest.avi")
 parser.add_argument("--algo",
                     type=str,
-                    help="Missing --algo: Background Subtraction method (MOG2/KNN",
+                    help="Missing --algo: Background Subtraction method (MOG2/KNN)",
                     default="MOG2")
 args = parser.parse_args()
 
@@ -26,14 +26,14 @@ elif args.algo == "KNN":
     bgsub = cv2.createBackgroundSubtractorKNN()
     K = bgsub.getkNNSamples()
     print("using K={} Clusters".format(K))
-    bgsub.setkNNSamples(3)
-    K = bgsub.getkNNSamples()
-    print("using K={} Clusters".format(K))
+    # bgsub.setkNNSamples(3)
+    # K = bgsub.getkNNSamples()
+    # print("using K={} Clusters".format(K))
 
 args.input = os.path.join("Files", args.input)
 cap = cv2.VideoCapture(args.input)
 
-kernel = np.ones((3, 3), dtype=np.uint8)
+# kernel = np.ones((3, 3), dtype=np.uint8)
 
 while True:
     ret, frame = cap.read()
