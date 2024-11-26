@@ -11,7 +11,8 @@ parser.add_argument("--input",
                     default="vtest.avi")
 parser.add_argument("--algo",
                     type=str,
-                    help="Missing --algo: Background Subtraction method (MOG2/KNN")
+                    help="Missing --algo: Background Subtraction method (MOG2/KNN",
+                    default="MOG2")
 args = parser.parse_args()
 
 if args.algo == "MOG2":
