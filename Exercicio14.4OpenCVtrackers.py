@@ -24,9 +24,8 @@ if tracker_type == "CSRT":
 ret, frame = cap.read()
 
 # Define an initial bounding box
-# x, y, w, h = 300, 200, 100, 50  # simply hardcoded the values for traffic
-# x, y, w, h = 205, 65, 20, 40  # simply hardcoded the values for pedestrians video003
-x, y, w, h = 495, 156, 45, 80  # simply hardcoded the values for pedestrians vtest
+x, y, w, h = 250, 220, 45, 90  # simply hardcoded the values for traffic
+# x, y, w, h = 495, 156, 45, 80  # simply hardcoded the values for pedestrians vtest
 bbox = (x, y, w, h)
 img2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
 cv2.imshow('inicial', img2)
