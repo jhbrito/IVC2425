@@ -16,17 +16,19 @@ parser.add_argument('--input',
                     default=os.path.join('Files', 'vtest.avi'))
 args = parser.parse_args()
 
-cap = cv2.VideoCapture(args.input)
-
-#create instance of SORT
-mot_tracker = Sort()
-# Create some random colors
-colors = np.random.randint(0, 255, (1000, 3))
-
+#create instance of YOLO
 model = YOLO("yolov8n.pt")
 print("Known classes: ", str(len(model.names)))
 for i in range(len(model.names)):
     print(model.names[i])
+
+#create instance of SORT
+mot_tracker = Sort()
+
+# Create some random colors
+colors = np.random.randint(0, 255, (1000, 3))
+
+cap = cv2.VideoCapture(args.input)
 
 while True:
     # Start timer
@@ -48,11 +50,11 @@ while True:
         (x1, y1, x2, y2, conf, class_id) = object.boxes.data[0]
         detections.append((int(x1), int(y1), int(x2), int(y2)))
     detections = np.array(detections)
-    track_bbs_ids = mot_tracker.update(detections)
+    tracks = mot_tracker.update(detections)
 
     # output
     image_objects = image.copy()
-    for track in track_bbs_ids:
+    for track in tracks:
         (x1, y1, x2, y2, id) = track
         id = int(id)
         c = colors[id, :].tolist()
@@ -77,10 +79,10 @@ while True:
     # Display FPS on frame
     cv2.putText(image_objects,
                 "FPS : " + str(int(fps)),
-                (20, 50),
+                (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.75,
-                (0, 0, 255),
+                (0, 255, 0),
                 2)
     cv2.imshow("Tracking", image_objects)
 
