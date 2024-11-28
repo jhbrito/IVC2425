@@ -1,4 +1,5 @@
-import cv2 as cv2
+import cv2
+# pip install opencv-contrib-python
 import argparse
 import os
 

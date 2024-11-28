@@ -4,7 +4,9 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input', type=str, help='Path to a video or a sequence of image.',
+parser.add_argument('--input',
+                    type=str,
+                    help='Path to a video or a sequence of image.',
                     default=os.path.join('Files', 'slow_traffic_small.mp4'))
 args = parser.parse_args()
 
