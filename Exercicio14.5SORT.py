@@ -6,10 +6,13 @@ from sort import *
 from ultralytics import YOLO
 
 parser = argparse.ArgumentParser()
-# parser.add_argument('--input', type=str, help='Path to a video or a sequence of image.',
+# parser.add_argument('--input',
+#                     type=str,
+#                     help='Path to a video or a sequence of image.',
 #                     default=os.path.join('Files', 'slow_traffic_small.mp4'))
 parser.add_argument('--input',
-                    type=str, help='Path to a video or a sequence of image.',
+                    type=str,
+                    help='Path to a video or a sequence of image.',
                     default=os.path.join('Files', 'vtest.avi'))
 args = parser.parse_args()
 
@@ -20,26 +23,20 @@ mot_tracker = Sort()
 # Create some random colors
 colors = np.random.randint(0, 255, (1000, 3))
 
-# Read first frame.
-ret, frame = cap.read()
-
-
 model = YOLO("yolov8n.pt")
 print("Known classes: ", str(len(model.names)))
 for i in range(len(model.names)):
     print(model.names[i])
 
-
 while True:
+    # Start timer
+    timer = cv2.getTickCount()
+
     # Read a new frame
     ret, image = cap.read()
     if not ret:
         break
 
-    # Start timer
-    timer = cv2.getTickCount()
-
-    # Update tracker
     # get detections
     image_RGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = model(image_RGB, verbose=False)
@@ -53,6 +50,7 @@ while True:
     detections = np.array(detections)
     track_bbs_ids = mot_tracker.update(detections)
 
+    # output
     image_objects = image.copy()
     for track in track_bbs_ids:
         (x1, y1, x2, y2, id) = track
@@ -76,7 +74,6 @@ while True:
 
     # Calculate Frames per second (FPS)
     fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
-
     # Display FPS on frame
     cv2.putText(image_objects,
                 "FPS : " + str(int(fps)),
@@ -84,7 +81,7 @@ while True:
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.75,
                 (0, 0, 255),
-                2);
+                2)
     cv2.imshow("Tracking", image_objects)
 
     c = cv2.waitKey(1)
